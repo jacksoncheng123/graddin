@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五旬節林漢光中學畢業晚宴座位查詢</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            padding: 40px;
+            background: white;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .search-box input, .search-box select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus, .search-box select:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+            animation: slideIn 0.5s ease;
+        }
+
+        .result-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .person-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .table-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .table-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(168, 237, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .table-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .table-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .table-card .person {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 6px;
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>五旬節林漢光中學畢業晚宴</h1>
+            <p>2025年6月17日（星期二）座位查詢系統</p>
+        </div>
+
+        <div class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <label for="nameSearch">按姓名查詢 Search by Name:</label>
+                    <input type="text" id="nameSearch" placeholder="輸入姓名 Enter name...">
+                </div>
+                <div class="search-box">
+                    <label for="tableSearch">按桌號查詢 Search by Table:</label>
+                    <select id="tableSearch">
+                        <option value="">選擇桌號 Select Table</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <button class="btn" onclick="showAllTables()">顯示所有桌位 Show All Tables</button>
+                </div>
+            </div>
+
+            <div id="results" class="results"></div>
+        </div>
+    </div>
+
+    <script>
+        // Seating data extracted from CSV
+        const seatingData = {
+            'HT1': ['何熰熾校長', '傅姑娘牧師', '葉向華助校', '劉鑒鋒助校', '譚敬民助校', '梁婉儀老師', '吳妙齡老師'],
+            'HT2': ['葉菁菁老師', '梁諾琛老師', '黃寶賢老師', '周綺婷老師', '黃慕晴老師', '吳家賢老師', '葉慧婷老師', '鄺錦麟老師', '陳美施老師'],
+            'Table 3': ['葉維善老師', '李泯鋒老師', '辛旻默老師', '劉德隆老師', '郭庭懿老師', '胡日晃老師', '楊振浩老師', '黃劍樂老師', '余嘉俊老師'],
+            'Table 5': ['陳國容老師', '胡俊如老師', '林穎嘉老師', '翁俊傑老師', '王志寶老師', '黎灝顓老師', '楊振強老師', '黎浩謙老師', '顏偉恩老師'],
+            'Table 7 (Class 6A)': ['陳紀柔', '萬栢彤', '李欣蒨', '陳臻瑩', '陳俊希', '馬詩穎', '黃韵懿', '楊曉彤', '尹熙蕾'],
+            'Table 8 (Class 6D)': ['陳俊安', '陳希朗', '陳嘉遙', '陳紀雅', '陳然韜', '鄭思成', '張曉晴', '趙良魁', '周婉晴', '夏穎詩', '林海澄'],
+            'Table 9 (Class 6C)': ['黃思朗', '關令晞', '趙康傑', '李思穎', '梁政楠', '李子健', '林宇旻', '莫琪慧', '吳明晉', '鄧耀尊', '黃曉青'],
+            'Table 10 (Class 6B)': ['陳藍', '陳希潼', '陳靖琳', '陳麗桉', '江晴朗', '曹美欣', '林銳東', '李卓盈'],
+            'Table 11 (Class 6B)': ['曾晶晶', '徐駿佑', '梁穎嘉', '莫青霖', '黃晞晴', '黃海昕', '黃心靖', '黃梓朗'],
+            'Table 12 (Class 6A)': ['李芷悠', '洪樂瑤', '何詩恩', '鄭凱盈', '黃梓悠', '陳梓健', '尹希雋', '鍾閔晴', '吳梓瑤'],
+            'Table 13（Class 6D)': ['林栢軒', '羅家駿', '李沛鋕', '文昊', '梅利姍', '蕭敬翹', '田頌揚', '黃雪盈', '黃穎琳', '黃悅齊'],
+            'Table 15 (Class 6C)': ['陳紫晴', '張錦文', '李易翀', '李曉彤', '黃俊熙', '楊凱彤', '楊可晴', '余玟謙', '翁凜璃'],
+            'Table 16 (Class 6B)': ['張婉琪', '鍾明晞', '符芊穎', '劉凱瑤', '劉家源', '李政源', '梁君仰', '梁曦陽'],
+            'Table 17 (Class 6A)': ['陳麒鴻', '詹皓霆', '李柏熙', '梁文朗', '梁栢軒', '楊正', '余淼鑫', '袁進', '劉廣琛']
+        };
+
+        // Populate table dropdown
+        function populateTableDropdown() {
+            const tableSelect = document.getElementById('tableSearch');
+            Object.keys(seatingData).forEach(table => {
+                const option = document.createElement('option');
+                option.value = table;
+                option.textContent = table;
+                tableSelect.appendChild(option);
+            });
+        }
+
+        // Search by name
+        function searchByName(name) {
+            const results = [];
+            const searchTerm = name.toLowerCase().trim();
+            
+            if (!searchTerm) return results;
+
+            Object.entries(seatingData).forEach(([table, people]) => {
+                people.forEach(person => {
+                    if (person.toLowerCase().includes(searchTerm)) {
+                        results.push({ table, person, people });
+                    }
+                });
+            });
+
+            return results;
+        }
+
+        // Search by table
+        function searchByTable(tableName) {
+            if (!tableName || !seatingData[tableName]) return null;
+            return { table: tableName, people: seatingData[tableName] };
+        }
+
+        // Display results
+        function displayResults(results, isTableSearch = false) {
+            const resultsDiv = document.getElementById('results');
+            
+            if (!results || (Array.isArray(results) && results.length === 0)) {
+                resultsDiv.innerHTML = '<div class="no-results">沒有找到相關結果 No results found</div>';
+                return;
+            }
+
+            let html = '';
+
+            if (isTableSearch) {
+                html = `
+                    <div class="result-card">
+                        <h3>${results.table}</h3>
+                        <p>此桌共有 ${results.people.length} 人 (${results.people.length} people at this table)</p>
+                        <div class="people-grid">
+                            ${results.people.map(person => `<div class="person-card">${person}</div>`).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                results.forEach(result => {
+                    html += `
+                        <div class="result-card">
+                            <h3>${result.person} → ${result.table}</h3>
+                            <p>同桌人員 Table companions:</p>
+                            <div class="people-grid">
+                                ${result.people.map(person => 
+                                    `<div class="person-card ${person === result.person ? 'highlight' : ''}">${person}</div>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // Show all tables
+        function showAllTables() {
+            const resultsDiv = document.getElementById('results');
+            let html = '<div class="table-overview">';
+            
+            Object.entries(seatingData).forEach(([table, people]) => {
+                html += `
+                    <div class="table-card">
+                        <h4>${table}</h4>
+                        <p>${people.length} 人 people</p>
+                        <div style="margin-top: 10px;">
+                            ${people.map(person => `<span class="person">${person}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            resultsDiv.innerHTML = html;
+        }
+
+        // Event listeners
+        document.getElementById('nameSearch').addEventListener('input', function(e) {
+            const results = searchByName(e.target.value);
+            displayResults(results);
+            
+            // Clear table selection when searching by name
+            if (e.target.value) {
+                document.getElementById('tableSearch').value = '';
+            }
+        });
+
+        document.getElementById('tableSearch').addEventListener('change', function(e) {
+            const result = searchByTable(e.target.value);
+            displayResults(result, true);
+            
+            // Clear name search when searching by table
+            if (e.target.value) {
+                document.getElementById('nameSearch').value = '';
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            populateTableDropdown();
+            showAllTables(); // Show all tables by default
+        });
+
+        // Add highlight style for search results
+        const style = document.createElement('style');
+        style.textContent = `
+            .person-card.highlight {
+                background: rgba(255, 255, 255, 0.4) !important;
+                border: 2px solid rgba(255, 255, 255, 0.8);
+                font-weight: bold;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
